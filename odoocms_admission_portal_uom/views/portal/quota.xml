@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="registration_oum" name="Admission Test Center Link"
+              inherit_id="odoocms_admission_portal.admission_quota_detail">
+        <xpath expr="//fieldset[@id='generic_quota']" position="replace">
+            <fieldset id="generic_quota">
+                <div class="block-info">
+                    <div class="frm-row">
+                        <div class="section colm colm12">
+                            <label for="rural_quota"/>
+                            <label class="field select">
+                                <input class="checkbox" name="is_rural_quota" type="checkbox" id="is_rural_quota"
+                                       onclick="on_change_is_is_rural_quota()" t-att-checked="student.is_rural_quota"
+                                       t-att-disabled="readonly"/>
+                                Do you want to apply for seats reserved seats and qouta?
+<!--                                <span style="color:orange;">Applying for more than one qouta will add PKR 2000 fees on-->
+<!--                                    each selection.-->
+<!--                                </span>-->
+                            </label>
+                        </div>
+                    </div>
+                    <div class="frm-row">
+                        <t t-if="student.is_rural_quota">
+                            <div id="rural_quota_div" t-attf-style="{{'display:none' if not student.is_rural_quota else 'display:block'}}" class="section colm colm6">
+                                <label for="middle_name">Qoutas List*</label>
+                                <t t-foreach="admission_quota" t-as="quota">
+                                    <div class="option-group field" t-if="quota.id in student_quotas">
+                                        <label class="option option-blue">
+                                            <input type="checkbox" name="quota_ids" id="quota_ids"
+                                                   checked="True"
+                                                   t-attf-onchange="quota_change({{quota.id}},'{{quota.code}}','{{quota.name}}',{{student.id}},this.checked)"
+                                                   t-att-disabled="readonly"/>
+                                            <span class="checkbox"/>
+                                            <t t-esc="quota.code"/>
+                                        </label>
+                                        <!--t-attf-checked="{{'true' if student.quota_ids.filtered(lambda x:quota_id == quota.id and x.application_id == student.id) else 'false'}}"-->
+                                    </div>
+                                    <div class="option-group field" t-if="not quota.id in student_quotas">
+                                        <label class="option option-blue">
+                                            <input type="checkbox" name="quota_ids" id="quota_ids"
+                                                   t-attf-onchange="quota_change({{quota.id}},'{{quota.code}}','{{quota.name}}',{{student.id}},this.checked)"
+                                                   t-att-disabled="readonly"/>
+                                            <span class="checkbox"/>
+                                            <t t-esc="quota.code"/>
+                                        </label>
+                                        <!--t-attf-checked="{{'true' if student.quota_ids.filtered(lambda x:quota_id == quota.id and x.application_id == student.id) else 'false'}}"-->
+                                    </div>
+                                </t>
+                               <!-- <label class="field select">
+                                    <select name="rural_quota" id="rural_quota" required="True">
+                                        <option value="" t-att-disabled="readonly and student.rural_quota != ''">Select
+                                            Quota
+                                        </option>
+                                        <t t-foreach="admission_quota" t-as="quota">
+                                            <option t-att-value="quota.name"
+                                                    t-att-selected="student.rural_quota == quota.code"
+                                                    t-att-disabled="readonly and student.rural_quota != quota.code ">
+                                                <t t-esc="quota.code"/>
+                                            </option>
+                                        </t>
+                                    </select>
+                                </label>-->
+                            </div>
+                        </t>
+                         <t t-if="not student.is_rural_quota">
+                            <div id="rural_quota_div" style="display:none" class="section colm colm6">
+                                <label for="middle_name">Qoutas List*</label>
+                                <t t-foreach="admission_quota" t-as="quota">
+                                    <div class="option-group field">
+                                        <label class="option option-blue" >
+                                            <input type="checkbox" name="quota_ids" id="quota_ids"
+                                                   t-attf-onchange="quota_change({{quota.id}},'{{quota.code}}','{{quota.name}}',{{student.id}},this.checked)"
+                                                   t-att-disabled="readonly"/>
+                                            <span class="checkbox"/>
+                                            <t t-esc="quota.code"/>
+                                        </label>
+                                    </div>
+                                </t>
+
+                               <!-- <label class="field select">
+                                    <select name="rural_quota" id="rural_quota" required="True">
+                                        <option value="" t-att-disabled="readonly and student.rural_quota != ''">Select
+                                            Quota
+                                        </option>
+                                        <t t-foreach="admission_quota" t-as="quota">
+                                            <option t-att-value="quota.name"
+                                                    t-att-selected="student.rural_quota == quota.code"
+                                                    t-att-disabled="readonly and student.rural_quota != quota.code ">
+                                                <t t-esc="quota.code"/>
+                                            </option>
+                                        </t>
+                                    </select>
+                                </label>-->
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </fieldset>
+
+        </xpath>
+
+    </template>
+</odoo>
+

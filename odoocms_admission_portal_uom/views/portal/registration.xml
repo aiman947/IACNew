@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="quota_oum" name="Admission Quota"
+              inherit_id="odoocms_admission_portal.addmission_registration">
+        <xpath expr="//div[@id='short_links']" position="replace">
+            <div id="short_links">
+                <a class="btn btn-light" id="close-eligibility-criteria"
+                   onclick="document.getElementById('eligibility-criteria').style.display='block';">
+                    View Eligibility Criteria 333
+                </a>
+            </div>
+        </xpath>
+
+    </template>
+
+</odoo>
+

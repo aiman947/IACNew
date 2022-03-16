@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_admission_uom" name="Admission Report" inherit_id="odoocms_admission_portal.report_admission_final_document">
+        <xpath expr="//div[@id='admission_form_report_head']" position="replace">
+            <div class="col col-10" style="text-align:center;" id="admission_form_report_head">
+                <h1 style="color:red;" t-esc="company.name" t-if="company.name"/> <br/>
+                <h5 style="text-align: center; color:red;border-bottom: 1px solid black double;">
+                    CANDIDATE REGISTERATION
+                </h5>
+            </div>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,111 @@
+<odoo>
+    <data>
+
+
+        <record id="view_odoocms_program_form_inherit" model="ir.ui.view">
+            <field name="name">uom_program_view_form</field>
+            <field name="model">odoocms.program</field>
+            <field name="inherit_id" ref="odoocms.view_odoocms_program_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Admission Details">
+
+                        <group>
+                            <field name="test"/>
+                            <field name="test_type"
+                                   attrs="{'invisible': [('test', '=', False )] , 'required': [('test','=',True)]}"/>
+                        </group>
+                        <group>
+                                <field name="matric_min"   />
+                                <field name="inter_min"   />
+                                <field name="a_level_min"   />
+                                <field name="physics_per_min"   />
+                                <field name="math_per_min"   />
+                                <field name="computer_per_min"   />
+                                <field name="chemistry_per_min"   />
+                            </group>
+
+                    </page>
+                </notebook>
+
+            </field>
+        </record>
+
+
+        <record id="view_odoocms_application_form_inherit_quota" model="ir.ui.view">
+            <field name="name">odoocms.application.form.inherit</field>
+            <field name="model">odoocms.application</field>
+            <field name="inherit_id" ref="odoocms_admission_portal.view_odoocms_application_form_inherit"/>
+            <field name="arch" type="xml">
+                <data>
+
+
+                    <xpath expr="//page[@name='quota']" position="replace">
+
+                        <page name="quota" string="Quota">
+
+                            <div>
+                                <group>
+                                    <group>
+
+
+                                        <field name="quota_ids">
+                                            <tree string="Quota"
+                                                  editable="bottom"> <!-- create="false" delete="false" edit="false" -->
+
+                                                <field name="quota_id" required="1"/>
+
+
+                                            </tree>
+                                        </field>
+                                    </group>
+                                    <!--                                    <group>-->
+                                    <!--                                        <field name="forces_quota" attrs="{'invisible':[('quota_id2','!=',False)]}"/>-->
+                                    <!--                                        <field name="quota_id2" attrs="{'invisible':[('quota_id2','=',False)]}"/>-->
+                                    <!--                                    </group>-->
+                                </group>
+
+                                <group attrs="{'invisible':[('is_rural_quota','!=',True)]}">
+                                    <group>
+                                        <field name="is_rural_quota"/>
+                                    </group>
+                                    <group>
+                                        <field name="rural_quota" attrs="{'invisible':[('quota_id','!=',False)]}"/>
+                                        <field name="quota_id" attrs="{'invisible':[('quota_id','=',False)]}"/>
+                                    </group>
+                                </group>
+                            </div>
+                            <group attrs="{'invisible':[('dae_quota_id','=',False)]}">
+                                <group>
+                                    <field name="dae_quota_id"/>
+                                </group>
+                            </group>
+
+<!--                            <group attrs="{'invisible':['|',('is_forces_quota','=',True),('is_rural_quota','=',True)]}">-->
+<!--                                <separator string="Open Merit"/>-->
+<!--                            </group>-->
+                        </page>
+                    </xpath>
+
+                    <xpath expr="//field[@name='step_number']" position="after">
+                        <field name="quota_total"/>
+                         <field name="total_amount"/>
+
+                    </xpath>
+                     <xpath expr="//field[@name='entry_test_status']" position="before">
+
+                         <field name="roll_number_lat"/>
+                         <field name="marks_lat"/>
+                         <field name="roll_number_etea"/>
+                         <field name="marks_etea"/>
+
+
+                    </xpath>
+
+
+                </data>
+            </field>
+        </record>
+
+    </data>
+</odoo>

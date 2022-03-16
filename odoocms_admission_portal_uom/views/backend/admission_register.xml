@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_odoocms_admission_register_form_inherit_uom" model="ir.ui.view">
+            <field name="name">odoocms.admission.register.form</field>
+            <field name="model">odoocms.admission.register</field>
+            <field name="inherit_id" ref="odoocms_admission.view_odoocms_admission_register_form"/>
+            <field name="arch" type="xml">
+                <field name="eligibility_criteria_image" position="after">
+                    <field name="prospectus"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="personal_detail_oum" name="Admission Personal Detail"
+              inherit_id="odoocms_admission_portal.admission_personal_detail">
+        <xpath expr="//div[@id='name_block']" position="replace">
+            <div class="section colm colm12">
+                <label for="your_name">Full Name*</label>
+                <label class="field prepend-icon">
+                    <input type="text" name="full_name" id="full_name" class="gui-input"
+                           onkeypress="return (event.charCode &gt; 64 &amp;&amp; event.charCode &lt; 91) || (event.charCode &gt; 96 &amp;&amp; event.charCode &lt; 123) || (event.charCode==32)"
+                           onkeydown="return alphaOnly(event);" placeholder="Full Name" t-att-value="student.name"
+                           required="true"
+                           t-att-readonly="readonly"/>
+                    <span class="field-icon">
+                        <i class="fa fa-user"/>
+                    </span>
+                </label>
+            </div>
+        </xpath>
+        <xpath expr="//div[@id='domicile_div']" position="after">
+            <div class="section colm colm3">
+                <label for="your_name">Distance from University(KM)*</label>
+                <label class="field prepend-icon">
+                    <input type="number" name="distance_university" id="distance_university" class="gui-input"
+                           placeholder="Distance from University in KM"
+                           t-att-value="student.distance_university" required="true"
+                           t-att-readonly="readonly"/>
+                    <span class="field-icon">
+                        <i class=""/>
+                    </span>
+                </label>
+            </div>
+        </xpath>
+    </template>
+</odoo>

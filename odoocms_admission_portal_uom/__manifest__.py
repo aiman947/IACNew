@@ -1,0 +1,26 @@
+# -*- encoding: utf-8 -*-
+{
+    'name': 'Admission Portal UOM',
+    'summary': 'University Online Admission Application for University of Malakand',
+    'category': 'OdooCMS',
+    'version': '14.0',
+    'license': 'LGPL-3',
+    'category': 'OdooCMS',
+    'sequence': 16,
+    'author': 'AARSOL &amp; Sulman Shaukat',
+    'company': 'AARSOL',
+    'website': 'http://www.aarsol.com/',
+    'depends': ['odoocms_admission'],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/portal/personal_detail.xml',
+        'views/portal/program_choices.xml',
+        'views/portal/registration.xml',
+        'views/portal/educational_detail.xml',
+        'views/portal/report_admission_form.xml',
+        'views/portal/quota.xml',
+        'views/backend/admission_test.xml',
+'views/backend/admission_register.xml',
+    ],
+    'application': True,
+}

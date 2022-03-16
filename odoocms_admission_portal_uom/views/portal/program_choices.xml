@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="program_choices_oum" name="Admission Program Choices"
+              inherit_id="odoocms_admission_portal.admission_programs">
+<!--        <xpath expr="//div[@id='discipline']" position="after">-->
+<!--            <div class="frm-row">-->
+<!--                <small style="color:red; font:bold;">Every 3 preferences PKR 2000 will be added in fee.</small>-->
+<!--            </div>-->
+<!--        </xpath>-->
+         <xpath expr="//div[@id='list_of_discipline']" position="replace">
+             <div class="frm-row" id="list_of_discipline">
+                <div class="section colm colm4">
+                    <label class="field select">
+
+                                <input class="checkbox" t-att-disabled="readonly" name="discipline_list" type="checkbox" id="discipline_list"
+                                       onchange="discipline_program(my_id= 1)"
+                                      />
+                                Click to populate programs list
+                           </label>
+
+                  <label id="save_preference_lbl" style="display:none;color:red;" class="field select">
+
+                                <input  class="checkbox" t-att-disabled="readonly" name="gg" type="checkbox" id="save_preference"
+                                       onclick="window.location.reload();"
+                                />
+                      Save Preference Selection *
+                  </label>
+
+
+                       <!-- <select name="discipline_list" id="discipline_list"
+                                onchange="discipline_program(my_id= this.value)" required="True">
+                            <option value="" t-att-selected="not discipline_1">Select</option>
+                            <t t-foreach="discipline_ids" t-as="discipline">
+                                <option t-att-selected="discipline_1 and discipline_1.id == discipline.id"
+                                        t-att-value="discipline.id">
+                                    <t t-esc="discipline.name"/>
+                                </option>
+                            </t>
+                        </select>-->
+                       <!-- <i class="arrow double"/>-->
+
+                </div>
+            </div>
+        </xpath>
+
+
+    </template>
+</odoo>

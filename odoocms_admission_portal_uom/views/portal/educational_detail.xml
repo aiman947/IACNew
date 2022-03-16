@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="admission_education_detail_uom" name="Entry Test UOM"
+              inherit_id="odoocms_admission_portal.matricpercentage">
+         <!--   Inter Check based on preference    -->
+        <!-- <xpath expr="//input[@id='interpercentage']" position="attributes">
+            <attribute name="min"><t t-esc="inter_minimum"/></attribute>
+        </xpath>-->
+         <!--   A level Check based on preference    -->
+         <!--<xpath expr="//input[@id='a_level_percentage']" position="attributes">
+            <attribute name="min"><t t-esc="a_level_minimum"/></attribute>
+        </xpath>-->
+        <xpath expr="//div[@name='entry_test_detail']" position="replace">
+            <t t-foreach="program_preferences_ordered" t-as="prog">
+            <div t-if="prog.program_id.test" class="block-info" name="entry_test_detail">
+                <legend >Test Details</legend>
+
+                <div t-if="prog.program_id.test_type == 'LAT' or prog.program_id.test_type == 'lat'" class="frm-row">
+                    <div class="frm-row">
+                        <label for="">LAT Marks</label>
+                    </div>
+                    <div class="section colm colm4">
+                        <label for="roll_number_lat">Roll Number</label>
+                             <input type="text" name="roll_number_lat" id="roll_number_lat" class="gui-input"
+                                    t-att-value="student.roll_number_lat" placeholder="Roll Number" required=""/>
+                    </div>
+                     <div class="section colm colm4">
+                        <label for="marks_lat">Marks</label>
+                             <input type="text" name="marks_lat" id="roll_number_lat" class="gui-input"
+                                    t-att-value="student.marks_lat" placeholder="Obtained Marks" required=""/>
+                    </div>
+                </div>
+                 <div t-if="prog.program_id.test_type == 'ETEA' or prog.program_id.test_type == 'etea' " class="frm-row">
+                      <div class="frm-row">
+                        <label for="">ETEA Marks</label>
+                    </div>
+                    <div class="section colm colm4">
+                         <div class="section colm colm4">
+                        <label for="roll_number_etea">Roll Number</label>
+                             <input type="text" name="roll_number_etea" id="roll_number_lat" class="gui-input"
+                                    t-att-value="student.roll_number_etea" placeholder="Roll Number" required=""/>
+                    </div>
+                     <div class="section colm colm4">
+                        <label for="marks_etea">Marks</label>
+                             <input type="text" name="marks_etea" id="roll_number_lat" class="gui-input"
+                              t-att-value="student.marks_etea" placeholder="Obtained Marks" required=""/>
+                    </div>
+                    </div>
+                </div>
+            </div>
+         </t>
+
+            <div  style="display:none" class="frm-row">
+                    <div class="section colm colm4">
+                        <label for="test_type">Entry Test</label>
+                        <label class="field select">
+                            <select id="test_type" name="test_type"
+                                    t-attf-onchange="onchange_gat_sat('odoocms_admission_portal-t-{{test_step_sequence}}')">
+                                <t>
+                                    <option value="UET"
+                                            t-att-selected="student.test_type == 'UET'"
+                                            t-att-disabled="readonly and student.test_type != 'UET'">
+                                        <span t-esc="company.short_name"/> Entry Test
+                                    </option>
+                                    <option value="SAT"
+                                            t-att-selected="student.test_type == 'SAT'"
+                                            t-att-disabled="readonly and student.test_type != 'SAT'">
+                                        SAT
+                                    </option>
+                                </t>
+                            </select>
+                            <i class="arrow double"/>
+                        </label>
+                    </div>
+                </div>
+         <div class="frm-row" id="uet_message_div" style="display:none">
+                    <div class="section colm colm12">
+                        <p>
+                            <b></b>
+                        </p>
+                    </div>
+                </div>
+                <div class="frm-row" id="sat_outer_div" style="display:none">
+                    <p>
+                        <b>Enter Your valid SAT Test detail. Result should be
+                            valid till last date of application submission.
+                        </b>
+                    </p>
+                    <div class="section colm colm4">
+                        <label for="test_total_marks">Total Score</label>
+                        <label class="field prepend-icon">
+                            <input type="number" min="0"
+                                   t-att-value="student.test_total_marks or 2400"  t-att-readonly="readonly"
+                                   name="test_total_marks" id="test_total_marks"
+                                   class="gui-input" onChange="onchange_test_marks()"/>
+                            <span class="field-icon"><i class="fa fa-credit-card"/></span>
+                        </label>
+                    </div>
+                    <div class="section colm colm4">
+                        <label for="test_obtained_marks">Obtained Score</label>
+                        <label class="field prepend-icon">
+                            <input type="number" min='0' t-att-value="student.test_obtained_marks or 0" t-att-readonly="readonly"
+                                   name="test_obtained_marks" id="test_obtained_marks"
+                                   class="gui-input" onChange="onchange_test_marks()"/>
+                                <span class="field-icon"><i class="fa fa-credit-card"/></span>
+                        </label>
+                    </div>
+                    <div class="section colm colm4">
+                        <label for="test_percentage">Percentage</label>
+                        <label class="field prepend-icon">
+                            <input type="number" step="0.01" max="100" t-att-value="student.test_percentage or 0"
+                                   name="test_percentage" id="test_percentage"
+                                   class="gui-input" readonly="True"/>
+                                <span class="field-icon"><i class="fa fa-credit-card"/></span>
+                        </label>
+                    </div>
+                </div>
+        </xpath>
+    </template>
+  <template id="admission_education_detail_uom2" name="Matric Check"
+              inherit_id="odoocms_admission_portal.education_top_detail">
+        <!--   Matric Check based on preference    -->
+
+       <xpath expr="//div[@id='matric_div']" position="inside">
+             <t t-set="matric_minimum" t-value="0"/>
+         <t t-set="inter_minimum" t-value="0"/>
+         <t t-set="a_level_minimum" t-value="0"/>
+         <t t-foreach="prefs_1" t-as="rec">
+             <t t-if="rec.program_id.matric_min >= matric_minimum">
+                 <t t-set="matric_minimum" t-value="rec.program_id.matric_min"/>
+             </t>
+         </t>
+          <t t-foreach="prefs_1" t-as="rec">
+             <t t-if="rec.program_id.inter_min >= inter_minimum">
+                 <t t-set="inter_minimum" t-value="rec.program_id.inter_min"/>
+             </t>
+         </t>
+          <t t-foreach="prefs_1" t-as="rec">
+             <t t-if="rec.program_id.a_level_min >= a_level_minimum">
+                 <t t-set="inter_minimum" t-value="rec.program_id.a_level_min"/>
+             </t>
+         </t>
+         </xpath>
+         <xpath expr="//input[@id='matricpercentage']" position="attributes">
+            <attribute name="min"><t t-esc="matric_minimum"/></attribute>
+        </xpath>
+    </template>
+
+
+
+</odoo>
+
+
+
+
+
+
+

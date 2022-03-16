@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+
+
+access_odoocms_admission_applicant_quota_manager,odoocms.admission.applicant.quota,model_odoocms_admission_applicant_quota,odoocms.group_cms_manager,1,1,1,0
+access_odoocms_admission_applicant_quota_admission_user,odoocms.admission.applicant.quota,model_odoocms_admission_applicant_quota,odoocms_admission.group_admission_user,1,0,0,0
